@@ -31,7 +31,7 @@ class LeoTipView : UIView {
        case  circle
     }
     
-    private var position : (Position ,  Position )? = nil
+   private var position : (Position ,  Position )? = nil
    private var targetFrame : CGRect = .zero
    private var shape : TipShape = .rectangle
    private   let shapelayer : CAShapeLayer = CAShapeLayer()
@@ -63,10 +63,11 @@ class LeoTipView : UIView {
     
     }
     @objc  func touchUpInside() {
+        
     self.isHidden = false
     shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(0.5).cgColor //
-        
     shapelayer.isHidden = false
+   
     }
     
  
@@ -75,9 +76,26 @@ class LeoTipView : UIView {
         
         
         self.backgroundColor = .clear
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tap.delegate = self
-        addGestureRecognizer(tap)
+        
+        var isAddGesture = true
+        
+        for object in elements {
+            
+            if object is UIButton {
+                isAddGesture = false
+                break
+            }
+            
+        }
+        
+        if isAddGesture {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            tap.delegate = self
+            addGestureRecognizer(tap)
+        }
+        
+        
+        
         // self.layer.sublayers?.removeAll()
         let  superFrame  : CGRect = self.bounds
         let  frame : CGRect = targetFrame
@@ -132,7 +150,7 @@ extension LeoTipView {
     
     public final func build() {
         
-        print(targetFrame , "_______ ",  self.frame , self.bounds )
+       // print(targetFrame , "_______ ",  self.frame , self.bounds )
         
         draw()
     }
@@ -165,7 +183,7 @@ extension LeoTipView {
         
     }
     
-    public func withAddView ( callback : (()-> UIView)? = nil ) -> LeoTipView {
+    public func withAddAnyView ( callback : (()-> UIView)? = nil ) -> LeoTipView {
         if let view = callback?() {
                elements.append(view)
         }
@@ -182,9 +200,7 @@ extension LeoTipView {
     }
     
 }
-
 extension UIButton : LeoToolTipable  {
-    
      func leoAddOn(_ view :  UIView ) -> LeoTipView {
         let backGroundView = LeoTipView(frame: view.bounds, targetframe: self.frame)
         backGroundView.isHidden = true
@@ -192,8 +208,11 @@ extension UIButton : LeoToolTipable  {
         addTarget(backGroundView, action:#selector(LeoTipView.touchUpInside), for: .touchUpInside)
         return backGroundView
     }
-    
-   
+    func leoHide(){
+        if self.superview?.superview is LeoTipView {
+               self.superview?.superview?.isHidden  = true
+        }
+    }
 }
 
 

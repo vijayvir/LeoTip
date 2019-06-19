@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         btnSample.leoAddOn(self.view)
             .withBackgroundColor(.orange)
             .withPrint(){
@@ -28,23 +29,27 @@ class ViewController: UIViewController {
                 print("Some withShape ")
             }
             .withAlpha(0.7)
+            .withSelf(){ object in
+                
+            }
+            
             .build()
         
         btnSecond.leoAddOn(self.view)
              .withBackgroundColor(.purple)
-             .withAddView{
+             .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "First View"
                 someView.backgroundColor = .red
                 return someView
              }
-            .withAddView{
+            .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Seond view"
                 someView.backgroundColor = .red
                 return someView
             }
-            .withAddView{
+            .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Third View "
                 someView.backgroundColor = .red
@@ -55,29 +60,29 @@ class ViewController: UIViewController {
         
         btnCenter.leoAddOn(self.view)
             .withBackgroundColor(.yellow)
-            .withAddView{
+            .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "btnCenter"
                 someView.backgroundColor = .red
                 return someView
             }
-            .withAddView{
+            .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Seond view"
                 someView.backgroundColor = .red
                 return someView
             }
-            .withAddView{
+            .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Third View "
                 someView.backgroundColor = .red
                 return someView
                 
                 
-            } .withAddView{
+            } .withAddAnyView{
                 let someView = UIButton()
                 someView.setTitle("Some Button target", for: .normal)
-                someView.addTarget(self, action: #selector(self.btnPressed), for: .touchUpInside)
+                someView.addTarget(self, action: #selector(ViewController.btnPressed), for: .touchUpInside)
                 someView.backgroundColor = .blue
                 return someView
             }
@@ -88,7 +93,7 @@ class ViewController: UIViewController {
             .build()
         
         
-        btnCenterDown.leoAddOn(self.view)
+        btnLast.leoAddOn(self.view)
             .withAlpha(0.3)
             .withBackgroundColor(.cyan)
             .build()
@@ -97,7 +102,8 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func btnPressed() {
+    @objc func btnPressed(sender:UIButton) {
+        sender.leoHide()
         print("Do Some work here ")
         
     }
