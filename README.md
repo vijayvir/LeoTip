@@ -42,13 +42,14 @@ This class have following Modifier
             return someView
             }
     ```
-8.  ```swift  build()  ```
+
      This  will make the tip view on the target (Button)  with above modify builder and added views 
      
      
-     ## Sample  
+     ## Example
      
-     ```swift        btnCenter.leoAddOn(self.view)
+     ```swift      
+     btnCenter.leoAddOn(self.view)
      .withBackgroundColor(.yellow)
      .withAddAnyView{
      let someView = UILabel()
@@ -77,6 +78,6 @@ This class have following Modifier
      return someView
      }
      .build()```
-
+     
 
 
