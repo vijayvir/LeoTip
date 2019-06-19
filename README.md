@@ -45,9 +45,38 @@ This class have following Modifier
 8.  ```swift  build()  ```
      This  will make the tip view on the target (Button)  with above modify builder and added views 
      
-1.  ```swift   ```
-1.  ```swift   ```
-1.  ```swift   ```
-1.  ```swift   ```
+     
+     ## Sample  
+     
+     ```swift        btnCenter.leoAddOn(self.view)
+     .withBackgroundColor(.yellow)
+     .withAddAnyView{
+     let someView = UILabel()
+     someView.text = "btnCenter"
+     someView.backgroundColor = .red
+     return someView
+     }
+     .withAddAnyView{
+     let someView = UILabel()
+     someView.text = "Seond view"
+     someView.backgroundColor = .red
+     return someView
+     }
+     .withAddAnyView{
+     let someView = UILabel()
+     someView.text = "Third View "
+     someView.backgroundColor = .red
+     return someView
+     
+     
+     } .withAddAnyView{
+     let someView = UIButton()
+     someView.setTitle("Some Button target", for: .normal)
+     someView.addTarget(self, action: #selector(ViewController.btnPressed), for: .touchUpInside)
+     someView.backgroundColor = .blue
+     return someView
+     }
+     .build()```
+
 
 
