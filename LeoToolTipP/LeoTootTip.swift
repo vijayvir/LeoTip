@@ -12,7 +12,7 @@ import UIKit
 
 protocol LeoToolTipable where Self: UIButton  {
   
-    func leoAddOn(_ view :  UIView ) -> LeoTipView
+func leoAddOn(_ view :  UIView , superView : UIView? ) -> LeoTipView
     
 }
 extension LeoToolTipable where Self: UIButton  {
@@ -37,7 +37,7 @@ class LeoTipView : UIView {
    private   let shapelayer : CAShapeLayer = CAShapeLayer()
    private var  layerBackgroundColor : UIColor = .blue
    private var layerBackgroundAlpa : CGFloat = 0.5
-    
+   private var topAnchorConstraint : CGFloat = 44
     private var  elements : [UIView] = []
     
     
@@ -98,8 +98,11 @@ class LeoTipView : UIView {
         
         // self.layer.sublayers?.removeAll()
         let  superFrame  : CGRect = self.bounds
+        
         let  frame : CGRect = targetFrame
+        
         let path = CGMutablePath()
+       
         if shape == .rectangle {
             path.addRect(frame)
         } else if shape == .circle {
@@ -131,7 +134,7 @@ class LeoTipView : UIView {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.leadingAnchor.constraint(equalTo: self.leadingAnchor ,constant: 15).isActive = true
         stackview.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 15).isActive = true
-        stackview.topAnchor.constraint(equalTo: self.topAnchor ,constant: 15).isActive = true
+        stackview.topAnchor.constraint(equalTo: self.topAnchor ,constant: topAnchorConstraint).isActive = true
         
         
     }
@@ -148,13 +151,25 @@ extension LeoTipView {
     
     
     
-    public final func build() {
+    public final func build() -> LeoTipView  {
         
-       // print(targetFrame , "_______ ",  self.frame , self.bounds )
-        
+        print(targetFrame , "_______ ",  self.frame , self.bounds )
         draw()
+        return self
     }
 
+    
+    
+    
+    public  func withTopAnchorConstraint(_  value : CGFloat) -> LeoTipView{
+        
+        self.topAnchorConstraint = value
+        
+        return self
+        
+    }
+    
+    
     public  func withAlpha(_  value : CGFloat) -> LeoTipView{
         
         self.layerBackgroundAlpa = value
@@ -198,12 +213,22 @@ extension LeoTipView {
         callback?(self)
         return self
     }
+    func run() {
+        
+    }
     
 }
 extension UIButton : LeoToolTipable  {
-     func leoAddOn(_ view :  UIView ) -> LeoTipView {
-        let backGroundView = LeoTipView(frame: view.bounds, targetframe: self.frame)
+    func leoAddOn(_ view :  UIView  , superView : UIView? = nil) -> LeoTipView {
+        
+        let frameconvert = view.convert(self.frame ,from:superView)
+        
+  
+        
+        let backGroundView = LeoTipView(frame: view.bounds, targetframe: frameconvert)
         backGroundView.isHidden = true
+        
+        
         view.addSubview(backGroundView)
         addTarget(backGroundView, action:#selector(LeoTipView.touchUpInside), for: .touchUpInside)
         return backGroundView

@@ -77,7 +77,8 @@ This class have following Modifier
      someView.backgroundColor = .blue
      return someView
      }
-     .build()```
+     .build()
+     ```
      
 
 
