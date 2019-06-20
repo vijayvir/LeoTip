@@ -4,17 +4,18 @@ It is   used to make
 
 This class have following Modifier 
 
-1.  ``` swift 
+1.   ```swift 
+
      leoAddOn(self.view) 
      ```  
-       Add the view on which you have to show the back ground view 
+     
+      Add the view on which you have to show the back ground view 
 
 2.  
 ```swift  
      .withBackgroundColor(.orange)  
      
 ``` 
-
 
 modify  the color to the background 
         
