@@ -75,7 +75,7 @@ This class have following Modifier.
 
 
 
-9.  `build`: This  will silent Result of call to 'withSomeFunction' is unused.
+9.  `run`: This  will silent Result of call to 'withSomeFunction' is unused.
 
   ```swift 
     .run()
@@ -84,7 +84,7 @@ This class have following Modifier.
   10.  `ShouldShow`: It is  not set it will show every time , you click on the view, If it is set user have option to show according to its conditions.
   
   ```swift 
-  .withClosureShouldShow({ () -> Bool in
+  .withShouldShow({ () -> Bool in
   
   return true
   

@@ -262,7 +262,7 @@ extension LeoTipView {
         return self
     }
     
-    func withClosureShouldShow(_ value : @escaping (() -> Bool) ) -> LeoTipView {
+    func withShouldShow(_ value : @escaping (() -> Bool) ) -> LeoTipView {
         closureShouldShow = value
         return self
     }

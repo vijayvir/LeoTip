@@ -128,7 +128,7 @@ class ViewController: UIViewController {
             }
             .withTopAnchorConstraint(200)
             .build()
-            .withClosureShouldShow({ () -> Bool in
+            .withShouldShow({ () -> Bool in
            
                 return true
                 
