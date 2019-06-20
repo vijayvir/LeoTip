@@ -122,12 +122,19 @@ class ViewController: UIViewController {
             .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Seond view jg jadffdu fsdui uifds uifuids uih fiusdhiu fhiusdh iufhidu shfuis dhiuh fiudshiu "
-                someView.numberOfLines = 0 
+                someView.numberOfLines = 0
                 someView.backgroundColor = .red
                 return someView
             }
             .withTopAnchorConstraint(200)
-            .build().run()
+            .build()
+            .withClosureShouldShow({ () -> Bool in
+           
+                return true
+                
+            })
+            
+            .run()
         
         
         

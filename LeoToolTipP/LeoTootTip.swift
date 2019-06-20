@@ -11,8 +11,8 @@ import UIKit
 
 
 protocol LeoToolTipable where Self: UIButton  {
-  
-func leoAddOn(_ view :  UIView , superView : UIView? ) -> LeoTipView
+    
+    func leoAddOn(_ view :  UIView , superView : UIView? ) -> LeoTipView
     
 }
 extension LeoToolTipable where Self: UIButton  {
@@ -29,24 +29,25 @@ class LeoTipView : UIView {
     
     
     enum TipShape {
-       case rectangle
-       case  circle
+        case rectangle
+        case  circle
     }
     
-   private var positionY : Position? = nil
-   private var targetFrame : CGRect = .zero
-   private var shape : TipShape = .rectangle
-   private let shapelayer : CAShapeLayer = CAShapeLayer()
-   private var  layerBackgroundColor : UIColor = .blue
-   private var layerBackgroundAlpa : CGFloat = 0.5
-   private var topAnchorConstraint : CGFloat = 44
-   private var  elements : [UIView] = []
-   private var automaticPositioning : Bool? = nil
+    private var positionY : Position? = nil
+    private var targetFrame : CGRect = .zero
+    private var shape : TipShape = .rectangle
+    private let shapelayer : CAShapeLayer = CAShapeLayer()
+    private var  layerBackgroundColor : UIColor = .blue
+    private var layerBackgroundAlpa : CGFloat = 0.5
+    private var topAnchorConstraint : CGFloat = 44
+    private var  elements : [UIView] = []
+    private var automaticPositioning : Bool? = nil
+    private var closureShouldShow : (() -> Bool)?
     
     init(frame: CGRect , targetframe :CGRect  ) {
         super.init(frame: frame)
         self.targetFrame = targetframe
-     
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -55,18 +56,29 @@ class LeoTipView : UIView {
     @objc func handleTap() {
         shapelayer.isHidden = true
         self.isHidden = true
-    
+        
     }
     
     @objc  func touchUpInside() {
+        if closureShouldShow != nil {
+            if let some =  closureShouldShow?() {
+                if some {
+                    self.isHidden = false
+                    shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(layerBackgroundAlpa).cgColor
+                    shapelayer.isHidden = false
+                }
+            }
+        }else {
+            self.isHidden = false
+            shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(layerBackgroundAlpa).cgColor //
+            shapelayer.isHidden = false
+        }
         
-    self.isHidden = false
-    shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(0.5).cgColor //
-    shapelayer.isHidden = false
-   
+        
+        
     }
     
- 
+    
     
     private func draw() {
         
@@ -98,7 +110,7 @@ class LeoTipView : UIView {
         let  frame : CGRect = targetFrame
         
         let path = CGMutablePath()
-       
+        
         if shape == .rectangle {
             path.addRect(frame)
         } else if shape == .circle {
@@ -110,11 +122,11 @@ class LeoTipView : UIView {
         shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(0.5).cgColor //
         
         shapelayer.fillRule = .evenOdd
-        self.alpha = 1
+        self.alpha = layerBackgroundAlpa
         self.layer.addSublayer(shapelayer)
         shapelayer.isHidden = true
         
-         let stackview = UIStackView(frame: self.bounds)
+        let stackview = UIStackView(frame: self.bounds)
         stackview.backgroundColor = .brown
         stackview.axis = .vertical
         stackview.distribution =  .fill
@@ -125,7 +137,7 @@ class LeoTipView : UIView {
         for object in elements {
             stackview.addArrangedSubview(object)
         }
-
+        
         self.addSubview(stackview)
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.leadingAnchor.constraint(equalTo: self.leadingAnchor ,constant: 15).isActive = true
@@ -151,7 +163,7 @@ extension LeoTipView {
         print("On frame " ,"", frame.minY , frame.midY , frame.maxY)
         
         print("\t On targetFrame " ,"", targetFrame.minY , targetFrame.midY , targetFrame.maxY)
-      
+        
         if positionY == nil {
             
             if automaticPositioning ?? true  {
@@ -184,16 +196,16 @@ extension LeoTipView {
                 topAnchorConstraint = frame.midY + (frame.midY/2)
             case .bottom:
                 topAnchorConstraint = 44
-           
+                
             }
             
         }
         
-     //   print(targetFrame , "_______ ",  self.frame , self.bounds )
+        //   print(targetFrame , "_______ ",  self.frame , self.bounds )
         draw()
         return self
     }
-
+    
     
     
     
@@ -233,10 +245,6 @@ extension LeoTipView {
         
     }
     
-    
-    
-    
-    
     public  func withShape(_  shape : TipShape) -> LeoTipView{
         self.shape = shape
         return self
@@ -245,12 +253,17 @@ extension LeoTipView {
     
     public func withAddAnyView ( callback : (()-> UIView)? = nil ) -> LeoTipView {
         if let view = callback?() {
-               elements.append(view)
+            elements.append(view)
         }
         return self
     }
     func withPrint(_ callback : (()-> Void)? = nil ) -> LeoTipView  {
         callback?()
+        return self
+    }
+    
+    func withClosureShouldShow(_ value : @escaping (() -> Bool) ) -> LeoTipView {
+        closureShouldShow = value
         return self
     }
     
@@ -268,7 +281,7 @@ extension UIButton : LeoToolTipable  {
         
         let frameconvert = view.convert(self.frame ,from:superView)
         
-  
+        
         
         let backGroundView = LeoTipView(frame: view.bounds, targetframe: frameconvert)
         backGroundView.isHidden = true
@@ -280,7 +293,7 @@ extension UIButton : LeoToolTipable  {
     }
     func leoHide(){
         if self.superview?.superview is LeoTipView {
-               self.superview?.superview?.isHidden  = true
+            self.superview?.superview?.isHidden  = true
         }
     }
 }

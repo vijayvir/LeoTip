@@ -48,7 +48,7 @@ This class have following Modifier.
      }
 ``` 
 
-6.  `AddAnyView`: Add Any view in tipTool view
+7.  `AddAnyView`: Add Any view in tipTool view
   
  ```swift  
      .withAddAnyView{
@@ -81,6 +81,18 @@ This class have following Modifier.
     .run()
   
   ```
+  10.  `ShouldShow`: It is  not set it will show every time , you click on the view, If it is set user have option to show according to its conditions.
+  
+  ```swift 
+  .withClosureShouldShow({ () -> Bool in
+  
+  return true
+  
+  })
+  
+  ```
+  
+  
 
 
 ## Note :  Special check for the addTarget 
