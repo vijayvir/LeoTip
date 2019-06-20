@@ -4,7 +4,7 @@ It is used to make tooltip on any UIButton
 
 
 
-<img src="https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif" width="100" height="100">
+<img src="https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif" width="300" height="600">
 
 This class have following Modifier 
 
