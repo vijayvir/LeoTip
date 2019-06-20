@@ -1,56 +1,53 @@
 #  Read Me : LeoToolTip 
 
-It is   used to make 
+It is used to make tooltip on any UIButton
 
 This class have following Modifier 
 
-1.   ```swift 
-
+1.  `AddOn`: Add the view on which you have to show the back ground view 
+     
+ ```swift 
      leoAddOn(self.view) 
-     ```  
-     
-      Add the view on which you have to show the back ground view 
+```
 
-2.  
-```swift  
-     .withBackgroundColor(.orange)  
-     
+2.  `BackgroundColor`:modify  the color to the background     
+  
+ ```swift  
+     .withBackgroundColor(.orange)      
+```         
+
+3.  `Shape`:Modify the shape to cirle, by default it is rectange  
+  
+ ```swift  
+     .withShape(.circle)     
 ``` 
 
-modify  the color to the background 
-        
-3. 
-```swift .withShape(.circle) 
- ```  
-Modify the shape to cirle, by default it is rectange
-         
-4. 
-``` swift   withAlpha(0.7)
-   
+4.  `Alpha`:Modify the alpha of the  background e  
+  
+ ```swift  
+     .withAlpha(0.7)    
 ```
-Modify the alpha of the  background 
-        
-5.  
-
-```swift  
-    .withPrint(){
+ 
+5.  `Print`:Do some print thing in between 
+  
+ ```swift  
+     .withPrint(){
         print("Some withBackgroundColor")
-        }
-```
-    
-Do some print thing in between 
-     
-6. 
-```swift   .withSelf(){ object in
+        }  
+``` 
+        
+6.  `Self`:Get the LeoTipView in between of the builder function
+  
+ ```swift  
+     . .withSelf(){ object in
      
      }
+``` 
 
-```
-Get the LeoTipView in between of the builder function
-     
-7.  ```
-     swift 
-        .withAddAnyView{
+6.  `AddAnyView`: Add Any view in tipTool view
+  
+ ```swift  
+     .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Third View "
                 someView.backgroundColor = .red
@@ -62,29 +59,31 @@ Get the LeoTipView in between of the builder function
             someView.backgroundColor = .blue
             return someView
             }
-    ```
-    
-8.  ```swift 
+  ```
+  
+8. `build`    This  will make the tip view on the target `(UIButton)`  with above modify builder and added views 
+
+ ```swift 
          .build()
    
    ```
   
-  This  will make the tip view on the target (Button)  with above modify builder and added views 
 
 
-9.  ```swift 
+
+9.  `build`: This  will silent Result of call to 'withSomeFunction' is unused
+
+  ```swift 
     .run()
   
   ```
-This  will silent Result of call to 'withSomeFunction' is unused
 
-## Note :  Specail check of the target 
+
+## Note :  Special check for the addTarget 
   By default the view dismiss on tap gesture but if button is there, Please assign the target in your class so that you dismiss the view ,  on your conditions 
   to dissmiss view Use following funtion  `sender.leoHide()` of `UIButton`
   
- 
- 10.  
-        ```swift 
+  ```swift 
         
         .withAddAnyView{
         let someView = UIButton()
@@ -101,7 +100,7 @@ This  will silent Result of call to 'withSomeFunction' is unused
         
         }
    
-   ````
+  ```
 
 ## Example
      
