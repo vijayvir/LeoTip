@@ -2,7 +2,7 @@
 
 It is used to make tooltip on any UIButton
 
-![UIGif preferences pane](https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif)
+![UIGif preferences pane](https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif| width=100)
 
 
 
