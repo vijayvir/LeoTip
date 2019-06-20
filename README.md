@@ -2,9 +2,9 @@
 
 It is used to make tooltip on any UIButton
 
-![UIGif preferences pane](https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif ) {:height="50%" width="50%"}
 
 
+<img src="https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif" width="100" height="100">
 
 This class have following Modifier 
 
