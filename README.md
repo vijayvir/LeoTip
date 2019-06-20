@@ -2,7 +2,7 @@
 
 It is used to make tooltip on any UIButton
 
-![UIGif preferences pane](https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif =100x20)
+![UIGif preferences pane](https://github.com/vijayvir/LeoTip/blob/master/LeoToolTipP/ToolTip.gif ) {:height="50%" width="50%"}
 
 
 
