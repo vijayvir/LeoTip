@@ -129,7 +129,7 @@ class LeoTipView : UIView {
         self.addSubview(stackview)
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.leadingAnchor.constraint(equalTo: self.leadingAnchor ,constant: 15).isActive = true
-        stackview.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 15).isActive = true
+        stackview.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -15).isActive = true
         stackview.topAnchor.constraint(equalTo: self.topAnchor ,constant: topAnchorConstraint).isActive = true
         
         

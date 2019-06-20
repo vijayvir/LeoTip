@@ -86,25 +86,25 @@ class ViewController: UIViewController {
             .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "btnCenter"
-                someView.backgroundColor = .red
+               
                 return someView
             }
             .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Seond view"
-                someView.backgroundColor = .red
+            
                 return someView
             }
             .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Third View "
-                someView.backgroundColor = .red
+               
                 return someView
                 
                 
             } .withAddAnyView{
                 let someView = UIButton()
-                someView.setTitle("Some Button target", for: .normal)
+                someView.setTitle(" Some Button target ", for: .normal)
                 someView.addTarget(self, action: #selector(ViewController.btnPressed), for: .touchUpInside)
                 someView.backgroundColor = .blue
                 return someView
@@ -119,6 +119,14 @@ class ViewController: UIViewController {
         btnLast.leoAddOn(self.view)
             .withAlpha(0.3)
             .withBackgroundColor(.cyan)
+            .withAddAnyView{
+                let someView = UILabel()
+                someView.text = "Seond view jg jadffdu fsdui uifds uifuids uih fiusdhiu fhiusdh iufhidu shfuis dhiuh fiudshiu "
+                someView.numberOfLines = 0 
+                someView.backgroundColor = .red
+                return someView
+            }
+            .withTopAnchorConstraint(200)
             .build().run()
         
         

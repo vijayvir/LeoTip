@@ -4,31 +4,47 @@ It is   used to make
 
 This class have following Modifier 
 
-1.  ```swift  leoAddOn(self.view) ```  
+1.  ``` swift 
+     leoAddOn(self.view) 
+     ```  
        Add the view on which you have to show the back ground view 
 
-2.  ```swift  .withBackgroundColor(.orange)   ``` 
-        modify  the color to the background 
-        
-3.  ```swift .withShape(.circle) ```  
-         modify the shape to cirle, by default it is rectange
-         
-4.  ```swift   withAlpha(0.7) ```
-        modify the alpha of the  background 
-        
-5.  ```swift   .withPrint(){
-        print("Some withBackgroundColor")
-        }```
-    ```
-    Do some print thing in between 
+2.  
+```swift  
+     .withBackgroundColor(.orange)  
      
-6.  ``` swift   .withSelf(){ object in
+``` 
+
+
+modify  the color to the background 
+        
+3.  ``` swift .withShape(.circle) 
+    ```  
+     modify the shape to cirle, by default it is rectange
+         
+4.  ``` swift   withAlpha(0.7)
+    ```
+modify the alpha of the  background 
+        
+5.  
+
+```swift  
+    .withPrint(){
+        print("Some withBackgroundColor")
+        }
+```
+    
+Do some print thing in between 
+     
+6. 
+    ``` swift   .withSelf(){ object in
      
      }
      ```
     Get the LeoTipView in between of the builder function
      
-7.  ```swift 
+7.  ```
+     swift 
         .withAddAnyView{
                 let someView = UILabel()
                 someView.text = "Third View "
@@ -42,6 +58,7 @@ This class have following Modifier
             return someView
             }
     ```
+    
 8.  ```swift 
          .build()
     ```
@@ -49,15 +66,38 @@ This class have following Modifier
   This  will make the tip view on the target (Button)  with above modify builder and added views 
 
 
-8.  ```swift 
+9.  ```swift 
     .run()
     ```
 This  will silent Result of call to 'withSomeFunction' is unused
 
+## Note :  Specail check of the target 
+  By default the view dismiss on tap gesture but if button is there, Please assign the target in your class so that you dismiss the view ,  on your conditions 
+  to dissmiss view Use following funtion  `sender.leoHide()` of `UIButton`
+  
+ 
+ 10.  
+        ```swift 
+        
+        .withAddAnyView{
+        let someView = UIButton()
+        someView.setTitle("Some Button target", for: .normal)
+        someView.addTarget(self, action: #selector(ViewController.btnPressed), for: .touchUpInside)
+        someView.backgroundColor = .blue
+        return someView
+        }
+        
+        
+        @objc func btnPressed(sender:UIButton) {
+        sender.leoHide()
+        print("Do Some work here ")
+        
+        }
+    ````
+
+## Example
      
-     ## Example
-     
-     ```swift      
+```swift      
     
     btnSample.leoAddOn(self.view , superView: btnSample.superview ) // jhf
     .withBackgroundColor(.orange)
@@ -92,7 +132,7 @@ This  will silent Result of call to 'withSomeFunction' is unused
     }.build().withSelf { (object) in
     object?.touchUpInside()
     }.run()
-     ```
-     
+    ```
+    
 
 
