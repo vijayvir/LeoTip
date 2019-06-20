@@ -6,33 +6,33 @@ It is used to make tooltip on any UIButton
 
 <img src="/LeoToolTipP/ToolTip.gif" width="300" height="600">
 
-This class have following Modifier 
+This class have following Modifier. 
 
-1.  `AddOn`: Add the view on which you have to show the back ground view 
+1.  `AddOn`: Add the view on which you have to show the back ground view. 
      
  ```swift 
      leoAddOn(self.view) 
 ```
 
-2.  `BackgroundColor`:modify  the color to the background     
+2.  `BackgroundColor`:modify  the color to the background.     
   
  ```swift  
      .withBackgroundColor(.orange)      
 ```         
 
-3.  `Shape`:Modify the shape to cirle, by default it is rectange  
+3.  `Shape`:Modify the shape to cirle, by default it is rectange.  
   
  ```swift  
      .withShape(.circle)     
 ``` 
 
-4.  `Alpha`:Modify the alpha of the  background e  
+4.  `Alpha`:Modify the alpha of the background.  
   
  ```swift  
      .withAlpha(0.7)    
 ```
  
-5.  `Print`:Do some print thing in between 
+5.  `Print`:Do some print thing in between. 
   
  ```swift  
      .withPrint(){
@@ -40,7 +40,7 @@ This class have following Modifier
         }  
 ``` 
         
-6.  `Self`:Get the LeoTipView in between of the builder function
+6.  `Self`:Get the LeoTipView in between of the builder function.
   
  ```swift  
      . .withSelf(){ object in
@@ -75,7 +75,7 @@ This class have following Modifier
 
 
 
-9.  `build`: This  will silent Result of call to 'withSomeFunction' is unused
+9.  `build`: This  will silent Result of call to 'withSomeFunction' is unused.
 
   ```swift 
     .run()
