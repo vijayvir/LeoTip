@@ -20,19 +20,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
-    
-       btnSample.leoAddOn(self.view , superView: btnSample.superview )
+       btnSample.leoAddOn(self.view , superView: btnSample.superview ) // jhf
             .withBackgroundColor(.orange)
             .withPrint(){
                 print("Some withBackgroundColor")
             }
-           .withShape(.circle)
-            .withPrint() {
-                print("Some withShape ")
-            }
+            .withShape(.circle)
             .withAlpha(1.0)
-           
+        /*
+             Set the position of the stackview
+             Priority
+             Highest -- .withPositionY(.topSecondary) Highest
+                     --  .withAutomaticPositioning(false) ,
+            It will take the topAnchor value by default its value is 44
+                    --  .withTopAnchorConstraint(700)
+             set the position.Y of the view with topAnchorConstraint if
+                   1. the .withPositionY is not assign
+                   2. and .withAutomaticPositioning(false)  is flase
+        
+        */
+            .withTopAnchorConstraint(700)
+            .withAutomaticPositioning(false)
+            .withPositionY(.centerSecondary)
+        
+        
             .withAddAnyView{
                 let someView = UIButton()
                 someView.setTitle("Some Button target", for: .normal)

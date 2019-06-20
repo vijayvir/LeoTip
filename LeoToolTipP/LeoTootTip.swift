@@ -20,8 +20,10 @@ extension LeoToolTipable where Self: UIButton  {
 class LeoTipView : UIView {
     
     enum Position {
-        case top
+        case topNavigation
+        case topSecondary
         case center
+        case centerSecondary
         case bottom
     }
     
@@ -31,37 +33,31 @@ class LeoTipView : UIView {
        case  circle
     }
     
-   private var position : (Position ,  Position )? = nil
+   private var positionY : Position? = nil
    private var targetFrame : CGRect = .zero
    private var shape : TipShape = .rectangle
-   private   let shapelayer : CAShapeLayer = CAShapeLayer()
+   private let shapelayer : CAShapeLayer = CAShapeLayer()
    private var  layerBackgroundColor : UIColor = .blue
    private var layerBackgroundAlpa : CGFloat = 0.5
    private var topAnchorConstraint : CGFloat = 44
-    private var  elements : [UIView] = []
-    
+   private var  elements : [UIView] = []
+   private var automaticPositioning : Bool? = nil
     
     init(frame: CGRect , targetframe :CGRect  ) {
         super.init(frame: frame)
         self.targetFrame = targetframe
      
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
- 
-    
-
-    
     
     @objc func handleTap() {
         shapelayer.isHidden = true
         self.isHidden = true
     
     }
+    
     @objc  func touchUpInside() {
         
     self.isHidden = false
@@ -152,8 +148,48 @@ extension LeoTipView {
     
     
     public final func build() -> LeoTipView  {
+        print("On frame " ,"", frame.minY , frame.midY , frame.maxY)
         
-        print(targetFrame , "_______ ",  self.frame , self.bounds )
+        print("\t On targetFrame " ,"", targetFrame.minY , targetFrame.midY , targetFrame.maxY)
+      
+        if positionY == nil {
+            
+            if automaticPositioning ?? true  {
+                if targetFrame.maxY < frame.midY {
+                    topAnchorConstraint = frame.midY
+                }else if  targetFrame.maxY  > frame.midY {
+                    topAnchorConstraint = 44
+                }else if  targetFrame.maxY  > frame.midY {
+                    topAnchorConstraint = 44
+                }else  {
+                    topAnchorConstraint = 44
+                }
+            } else {
+                
+            }
+            
+            
+            
+        } else if positionY != nil {
+            
+            switch positionY! {
+                
+            case .topNavigation:
+                topAnchorConstraint = 44
+            case .topSecondary:
+                topAnchorConstraint = frame.midY - (frame.midY/2)
+            case .center:
+                topAnchorConstraint = frame.midY
+            case .centerSecondary:
+                topAnchorConstraint = frame.midY + (frame.midY/2)
+            case .bottom:
+                topAnchorConstraint = 44
+           
+            }
+            
+        }
+        
+     //   print(targetFrame , "_______ ",  self.frame , self.bounds )
         draw()
         return self
     }
@@ -162,7 +198,7 @@ extension LeoTipView {
     
     
     public  func withTopAnchorConstraint(_  value : CGFloat) -> LeoTipView{
-        
+        self.automaticPositioning = false
         self.topAnchorConstraint = value
         
         return self
@@ -182,13 +218,22 @@ extension LeoTipView {
         self.layerBackgroundColor = color
         return self
     }
-    public  func withBackgroundColor(_  position : (Position ,  Position )) -> LeoTipView{
+    public  func withPositionY(_  position : Position) -> LeoTipView{
         
-        self.position = position
+        self.positionY = position
         
         return self
         
     }
+    
+    public  func withAutomaticPositioning(_  value : Bool) -> LeoTipView{
+        
+        self.automaticPositioning = value
+        return self
+        
+    }
+    
+    
     
     
     
