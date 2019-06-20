@@ -18,13 +18,16 @@ This class have following Modifier
 
 modify  the color to the background 
         
-3.  ``` swift .withShape(.circle) 
-    ```  
-     modify the shape to cirle, by default it is rectange
+3. 
+```swift .withShape(.circle) 
+ ```  
+Modify the shape to cirle, by default it is rectange
          
-4.  ``` swift   withAlpha(0.7)
-    ```
-modify the alpha of the  background 
+4. 
+``` swift   withAlpha(0.7)
+   
+```
+Modify the alpha of the  background 
         
 5.  
 
@@ -37,11 +40,12 @@ modify the alpha of the  background
 Do some print thing in between 
      
 6. 
-    ``` swift   .withSelf(){ object in
+```swift   .withSelf(){ object in
      
      }
-     ```
-    Get the LeoTipView in between of the builder function
+
+```
+Get the LeoTipView in between of the builder function
      
 7.  ```
      swift 
@@ -61,14 +65,16 @@ Do some print thing in between
     
 8.  ```swift 
          .build()
-    ```
+   
+   ```
   
   This  will make the tip view on the target (Button)  with above modify builder and added views 
 
 
 9.  ```swift 
     .run()
-    ```
+  
+  ```
 This  will silent Result of call to 'withSomeFunction' is unused
 
 ## Note :  Specail check of the target 
@@ -93,7 +99,8 @@ This  will silent Result of call to 'withSomeFunction' is unused
         print("Do Some work here ")
         
         }
-    ````
+   
+   ````
 
 ## Example
      
@@ -132,7 +139,8 @@ This  will silent Result of call to 'withSomeFunction' is unused
     }.build().withSelf { (object) in
     object?.touchUpInside()
     }.run()
-    ```
+   
+   ```
     
 
 
