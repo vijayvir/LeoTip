@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		189A313722BB630D00C4C457 /* ToolTip.gif in Resources */ = {isa = PBXBuildFile; fileRef = 189A313622BB630D00C4C457 /* ToolTip.gif */; };
 		18E21FB822BA0A6800480E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E21FB722BA0A6800480E12 /* AppDelegate.swift */; };
 		18E21FBA22BA0A6800480E12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E21FB922BA0A6800480E12 /* ViewController.swift */; };
 		18E21FBD22BA0A6800480E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E21FBB22BA0A6800480E12 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		189A313622BB630D00C4C457 /* ToolTip.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ToolTip.gif; sourceTree = "<group>"; };
 		18E21FB422BA0A6800480E12 /* LeoToolTipP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeoToolTipP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E21FB722BA0A6800480E12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18E21FB922BA0A6800480E12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				18E21FB722BA0A6800480E12 /* AppDelegate.swift */,
 				18E21FCB22BA0D4900480E12 /* LeoTootTip.swift */,
 				18E21FB922BA0A6800480E12 /* ViewController.swift */,
+				189A313622BB630D00C4C457 /* ToolTip.gif */,
 				18E21FD122BA538500480E12 /* README.md */,
 				18E21FBB22BA0A6800480E12 /* Main.storyboard */,
 				18E21FBE22BA0A6A00480E12 /* Assets.xcassets */,
@@ -135,6 +138,7 @@
 				18E21FBF22BA0A6A00480E12 /* Assets.xcassets in Resources */,
 				18E21FD222BA538500480E12 /* README.md in Resources */,
 				18E21FBD22BA0A6800480E12 /* Main.storyboard in Resources */,
+				189A313722BB630D00C4C457 /* ToolTip.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

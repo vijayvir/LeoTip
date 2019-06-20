@@ -2,6 +2,10 @@
 
 It is used to make tooltip on any UIButton
 
+![UIGif preferences pane](http://d.pr/i/rT4d+)
+
+
+
 This class have following Modifier 
 
 1.  `AddOn`: Add the view on which you have to show the back ground view 
