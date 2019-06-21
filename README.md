@@ -14,6 +14,11 @@ This class have following Modifier.
      leoAddOn(self.view) 
 ```
 
+For `Tableview`  use this 
+```swift 
+   cell.btnLeoTip.leoAddOn(self.view , superView: collectionView.subviews[0]).build().run()
+
+```
 2.  `BackgroundColor`:modify  the color to the background.     
   
  ```swift  
@@ -117,6 +122,8 @@ This class have following Modifier.
         }
    
   ```
+
+
 
 ## Example
      
