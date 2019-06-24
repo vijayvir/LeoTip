@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181C270E22BCC7D800C2EE21 /* PASampeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C270D22BCC7D800C2EE21 /* PASampeTableViewController.swift */; };
+		181C271022BCEBCA00C2EE21 /* UGWFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C270F22BCEBCA00C2EE21 /* UGWFonts.swift */; };
+		181C271222BCEBD200C2EE21 /* LeoFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C271122BCEBD200C2EE21 /* LeoFont.swift */; };
 		189A313722BB630D00C4C457 /* ToolTip.gif in Resources */ = {isa = PBXBuildFile; fileRef = 189A313622BB630D00C4C457 /* ToolTip.gif */; };
 		18E21FB822BA0A6800480E12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E21FB722BA0A6800480E12 /* AppDelegate.swift */; };
 		18E21FBA22BA0A6800480E12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E21FB922BA0A6800480E12 /* ViewController.swift */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181C270D22BCC7D800C2EE21 /* PASampeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PASampeTableViewController.swift; sourceTree = "<group>"; };
+		181C270F22BCEBCA00C2EE21 /* UGWFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UGWFonts.swift; sourceTree = "<group>"; };
+		181C271122BCEBD200C2EE21 /* LeoFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeoFont.swift; sourceTree = "<group>"; };
 		189A313622BB630D00C4C457 /* ToolTip.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ToolTip.gif; sourceTree = "<group>"; };
 		18E21FB422BA0A6800480E12 /* LeoToolTipP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeoToolTipP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E21FB722BA0A6800480E12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +71,9 @@
 				18E21FC922BA0C1800480E12 /* PointView.swift */,
 				18E21FB722BA0A6800480E12 /* AppDelegate.swift */,
 				18E21FCB22BA0D4900480E12 /* LeoTootTip.swift */,
+				181C270F22BCEBCA00C2EE21 /* UGWFonts.swift */,
+				181C270D22BCC7D800C2EE21 /* PASampeTableViewController.swift */,
+				181C271122BCEBD200C2EE21 /* LeoFont.swift */,
 				18E21FB922BA0A6800480E12 /* ViewController.swift */,
 				189A313622BB630D00C4C457 /* ToolTip.gif */,
 				18E21FD122BA538500480E12 /* README.md */,
@@ -150,6 +159,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E21FCA22BA0C1800480E12 /* PointView.swift in Sources */,
+				181C270E22BCC7D800C2EE21 /* PASampeTableViewController.swift in Sources */,
+				181C271222BCEBD200C2EE21 /* LeoFont.swift in Sources */,
+				181C271022BCEBCA00C2EE21 /* UGWFonts.swift in Sources */,
 				18E21FBA22BA0A6800480E12 /* ViewController.swift in Sources */,
 				18E21FCC22BA0D4900480E12 /* LeoTootTip.swift in Sources */,
 				18E21FB822BA0A6800480E12 /* AppDelegate.swift in Sources */,

@@ -8,16 +8,14 @@
 
 import Foundation
 import UIKit
-
-
 protocol LeoToolTipable where Self: UIButton  {
     
-    func leoAddOn(_ view :  UIView , superView : UIView? ) -> LeoTipView
+   func leoAddOn(_ view :  UIView , superView : UIView? ) -> LeoTipView
     
 }
 extension LeoToolTipable where Self: UIButton  {
 }
-class LeoTipView : UIView {
+final class LeoTipView : UIView {
     
     enum Position {
         case topNavigation
@@ -43,6 +41,9 @@ class LeoTipView : UIView {
     private var  elements : [UIView] = []
     private var automaticPositioning : Bool? = nil
     private var closureShouldShow : (() -> Bool)?
+     private var scale : CGFloat = 1
+    private var isOnce : (Bool , String) = (false , "")
+    
     
     init(frame: CGRect , targetframe :CGRect  ) {
         super.init(frame: frame)
@@ -60,6 +61,23 @@ class LeoTipView : UIView {
     }
     
     @objc  func touchUpInside() {
+        
+        
+        if  self.isOnce.0 {
+            
+            UserDefaults.standard.leoTipOnce(id: self.isOnce.1){
+                
+                self.operation()
+            }
+            
+        }else {
+            
+            operation()
+            
+        }
+    }
+    
+    func operation() {
         if closureShouldShow != nil {
             if let some =  closureShouldShow?() {
                 if some {
@@ -73,12 +91,7 @@ class LeoTipView : UIView {
             shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(layerBackgroundAlpa).cgColor //
             shapelayer.isHidden = false
         }
-        
-        
-        
     }
-    
-    
     
     private func draw() {
         
@@ -102,27 +115,36 @@ class LeoTipView : UIView {
             addGestureRecognizer(tap)
         }
         
-        
+        self.isOpaque = true
         
         // self.layer.sublayers?.removeAll()
         let  superFrame  : CGRect = self.bounds
         
-        let  frame : CGRect = targetFrame
+        var  frameTarget : CGRect = targetFrame
+        
+        
+        if scale > 1 {
+            frameTarget = CGRect(x: targetFrame.origin.x + targetFrame.size.width / 2  - ((targetFrame.size.width / 2 ) * scale    ),
+                                 y: targetFrame.origin.y + targetFrame.size.width / 2  - ((targetFrame.size.height / 2) * scale     ),
+                                 width: targetFrame.width *  scale ,
+                                 height: targetFrame.height *  scale )
+        }
+        
         
         let path = CGMutablePath()
         
         if shape == .rectangle {
-            path.addRect(frame)
+            path.addRect(frameTarget)
         } else if shape == .circle {
-            path.addEllipse(in: frame)
+            path.addEllipse(in: frameTarget)
         }
         path.addRect(superFrame)
         shapelayer.path = path
         self.clipsToBounds  = true
-        shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(0.5).cgColor //
+        shapelayer.fillColor = layerBackgroundColor.withAlphaComponent(layerBackgroundAlpa).cgColor //
         
         shapelayer.fillRule = .evenOdd
-        self.alpha = layerBackgroundAlpa
+        
         self.layer.addSublayer(shapelayer)
         shapelayer.isHidden = true
         
@@ -132,7 +154,7 @@ class LeoTipView : UIView {
         stackview.distribution =  .fill
         stackview.alignment = .leading
         stackview.spacing = 10
-        
+        stackview.isOpaque = true
         
         for object in elements {
             stackview.addArrangedSubview(object)
@@ -150,19 +172,17 @@ class LeoTipView : UIView {
 
 extension LeoTipView: UIGestureRecognizerDelegate {
     
-    open override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
 // MARK: Builder Patteren
 extension LeoTipView {
     
-    
-    
     public final func build() -> LeoTipView  {
-        print("On frame " ,"", frame.minY , frame.midY , frame.maxY)
+       // print("On frame " ,"", frame.minY , frame.midY , frame.maxY)
         
-        print("\t On targetFrame " ,"", targetFrame.minY , targetFrame.midY , targetFrame.maxY)
+       // print("\t On targetFrame " ,"", targetFrame.minY , targetFrame.midY , targetFrame.maxY)
         
         if positionY == nil {
             
@@ -209,7 +229,7 @@ extension LeoTipView {
     
     
     
-    public  func withTopAnchorConstraint(_  value : CGFloat) -> LeoTipView{
+    final   public  func withTopAnchorConstraint(_  value : CGFloat) -> LeoTipView{
         self.automaticPositioning = false
         self.topAnchorConstraint = value
         
@@ -218,7 +238,7 @@ extension LeoTipView {
     }
     
     
-    public  func withAlpha(_  value : CGFloat) -> LeoTipView{
+    final    public  func withAlpha(_  value : CGFloat) -> LeoTipView{
         
         self.layerBackgroundAlpa = value
         
@@ -226,11 +246,11 @@ extension LeoTipView {
         
     }
     
-    public  func withBackgroundColor(_  color : UIColor) -> LeoTipView{
+    final   public  func withBackgroundColor(_  color : UIColor) -> LeoTipView{
         self.layerBackgroundColor = color
         return self
     }
-    public  func withPositionY(_  position : Position) -> LeoTipView{
+    final    public  func withPositionY(_  position : Position) -> LeoTipView{
         
         self.positionY = position
         
@@ -238,36 +258,47 @@ extension LeoTipView {
         
     }
     
-    public  func withAutomaticPositioning(_  value : Bool) -> LeoTipView{
+    final  public  func withAutomaticPositioning(_  value : Bool) -> LeoTipView{
         
         self.automaticPositioning = value
         return self
         
     }
     
-    public  func withShape(_  shape : TipShape) -> LeoTipView{
+    final   public  func withShape(_  shape : TipShape) -> LeoTipView{
         self.shape = shape
         return self
         
     }
     
-    public func withAddAnyView ( callback : (()-> UIView)? = nil ) -> LeoTipView {
+    final  public func withAddAnyView ( callback : (()-> UIView)? = nil ) -> LeoTipView {
         if let view = callback?() {
             elements.append(view)
         }
         return self
     }
-    func withPrint(_ callback : (()-> Void)? = nil ) -> LeoTipView  {
+    final   func withPrint(_ callback : (()-> Void)? = nil ) -> LeoTipView  {
         callback?()
         return self
     }
+    public  func withScale(_  scale : CGFloat) -> LeoTipView{
+        self.scale = scale
+        return self
+        
+    }
+    final   public  func withIsOnce(_  shape : Bool , id : String = UUID().uuidString) -> LeoTipView{
+        self.isOnce = (shape , id)
+        return self
+        
+    }
     
-    func withShouldShow(_ value : @escaping (() -> Bool) ) -> LeoTipView {
+    
+    final  func withShouldShow(_ value : @escaping (() -> Bool) ) -> LeoTipView {
         closureShouldShow = value
         return self
     }
     
-    func withSelf(_ callback : ((LeoTipView?)-> Void)? = nil ) -> LeoTipView  {
+    final  func withSelf(_ callback : ((LeoTipView?)-> Void)? = nil ) -> LeoTipView  {
         callback?(self)
         return self
     }
@@ -276,26 +307,65 @@ extension LeoTipView {
     }
     
 }
+
+
+
+
+func lastViewUpto(_ view :  UIView ,  target : UIView  ) -> CGRect {
+    
+    if target.superview == view {
+        return CGRect(origin: CGPoint(x: view.convert(target.frame ,from:target).origin.x,
+                                      y: view.convert(target.frame ,from:target).origin.y),
+                      size:  view.convert(target.frame ,from:target).size)
+        
+    }
+    
+    if target.superview != nil {
+        
+        let some =   target.superview!.convert(target.frame ,from:target)
+        
+        let newGroup = target.superview!
+        newGroup.frame = CGRect(x: some.minX, y: some.minY, width: some.width, height: some.height)
+        
+        return lastViewUpto(view, target: newGroup )
+    }
+    
+    return target.frame
+    
+}
+
 extension UIButton : LeoToolTipable  {
-    func leoAddOn(_ view :  UIView  , superView : UIView? = nil) -> LeoTipView {
+    
+    
+    
+    final func  leoAddOn(_ view :  UIView  , superView : UIView? = nil) -> LeoTipView {
         
         let frameconvert = view.convert(self.frame ,from:superView)
-        
-        
-        
         let backGroundView = LeoTipView(frame: view.bounds, targetframe: frameconvert)
         backGroundView.isHidden = true
-        
         
         view.addSubview(backGroundView)
         addTarget(backGroundView, action:#selector(LeoTipView.touchUpInside), for: .touchUpInside)
         return backGroundView
     }
-    func leoHide(){
+    final   func leoHide(){
         if self.superview?.superview is LeoTipView {
             self.superview?.superview?.isHidden  = true
         }
     }
 }
+extension UserDefaults {
+    
+    final func leoTipOnce( id : String ,  _ callBack : (()->Void)? = nil  ) {
+        
+        if  UserDefaults.standard.bool(forKey:id) == false {
+            UserDefaults.standard.set(true, forKey: id)
+            callBack?()
+        }
+        
+    }
+    
+}
+
 
 
